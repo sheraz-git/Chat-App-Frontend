@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --primary: #5fa85f;
+  --white: #ffff;
+  --black: #000;
+}
+h1 {
+  color: #000;
+  font-family: "Inter";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+h2 {
+  color: #a7a7a7;
+  font-family: "Inter";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+h2.fw500 {
+  color: #000;
+  font-family: "Inter";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration-line: underline;
+}
+h3 {
+  color: #fff;
+  font-family: "Inter";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+h3.fw400 {
+  font-weight: 400;
+}
+
+h4 {
+  color: #7a7a7a;
+  font-family: "Inter";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+h5 {
+  color: #7a7a7a;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* button styling  */
+.primary {
+  border-radius: 5px;
+  border: 1px solid #a7a7a7;
+  color: #263238;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 11.5px 0px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  cursor: pointer;
+}
+.secondary {
+  width: 100%;
+  border-radius: 5px;
+  background: #5fa85f;
+  color: #fff;
+  font-family: "Inter";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 12px 0px;
+  border: none;
+cursor: pointer;
+}
+
+/* input styling  */
+.primary__input {
+  color: #a7a7a7;
+  font-family: "Inter";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  outline: none;
+  padding: 6px;
+  border-bottom: 1px solid #a7a7a7;
+}
+.otp__input {
+  width: 78px;
+  color: #a7a7a7;
+  font-family: "Inter";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border: none;
+  outline: none;
+  padding: 6px;
+  border-bottom: 1px solid #a7a7a7;
+  margin: auto;
+}
+
+.search__input {
+  width: 100%;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+background: #FFF;
+box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.25), -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
+}

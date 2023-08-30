@@ -1,0 +1,33 @@
+.mainContainer {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100vh;
+  background-color: aqua;
+}
+
+.centerContainer {
+  padding: 45px 120px;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.upperContainer {
+  text-align: center;
+}
+.lowerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 32px 0px;
+}
+.otp__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* gap: 15px; */
+}
+.resend__otp{
+    display: flex;
+    justify-content: end;
+}
