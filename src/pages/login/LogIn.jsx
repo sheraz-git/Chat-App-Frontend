@@ -20,6 +20,7 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
+
 const LogIn = () => {
   const [error, setError] = useState("");
   const formik = useFormik({
