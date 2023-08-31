@@ -7,11 +7,13 @@ import Button from "../../components/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import GoogleSvg from "../../assets/svgs/GoogleSvg";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../Redux/Userlogin/UserLogin";
+// import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -30,7 +32,15 @@ const LogIn = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      let resp=await login(values);
+      if(resp===200){
+        console.log(values);
+        console.log('login successfully');
+      }
+      else{
+console.log('errrrrrrrrrrrrrrrrrr');
+      }
+
     }
   });
 
