@@ -4,13 +4,15 @@ import style from "./otpVerify.module.css";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useDispatch } from "react-redux";
-import { verifyOtp } from "../../Redux/SignUp/signUpPage";
 import { useNavigate } from "react-router-dom";
+import { verifyOtp } from "../../Redux/SignUp/signUpPage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const OtpVerifyPage = () => {
   const [otp, setOtp] = useState('');
   const [error,setError]=useState('');
   const dispatch=useDispatch();
-  const navigate = useNavigate();
+  let navigate=useNavigate()
 
   const handleChange = (event) => {
     let { value } = event.target;
@@ -19,17 +21,31 @@ const OtpVerifyPage = () => {
   };
 
   const handleVerify = async() => {
+ 
     const response=await dispatch(verifyOtp(otp));
-    console.log("🚀 ~ file: OtpVerifyPage.jsx:20 ~ handleVerify ~ response:", response)
-    if (response.response?.status === 409) {
-      setError("Incorrect Otp");
+    
+    if (response.status === 200) {
+   
+      console.log(response.data.message);
+      toast.success(response.data.message)
+    
+      setTimeout(() => {
+           navigate("/login");
+      }, 2000);
     } else {
-        navigate("/dashboard");
+     
+      toast.error(response.message)
+
+      // toast.error(response.data.message)
+      // const {userId}=tokenGenerator();
+      // dispatch(sendOtp(userId));
+      // navigate("/otpVerify");
     }
 
   }
   return (
     <div className={style.mainContainer}>
+    <ToastContainer/>
       <div className={style.centerContainer}>
         <div className={style.upperContainer}>
           <Text type={"h1"} label={"Verify Email Address"} />
