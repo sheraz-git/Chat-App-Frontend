@@ -26,15 +26,15 @@ const OtpVerifyPage = () => {
     
     if (response.status === 200) {
    
-      console.log(response.data.message);
+  
       toast.success(response.data.message)
     
       setTimeout(() => {
            navigate("/login");
       }, 2000);
     } else {
-     
-      toast.error(response.message)
+     console.log(response,"errrrrrrrrrrrrrrrrrrrrrrrrrr");
+      toast.error(response.response.data.message)
 
       // toast.error(response.data.message)
       // const {userId}=tokenGenerator();

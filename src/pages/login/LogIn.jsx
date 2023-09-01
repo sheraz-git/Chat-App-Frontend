@@ -7,14 +7,13 @@ import Button from "../../components/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import GoogleSvg from "../../assets/svgs/GoogleSvg";
-import { login } from "../../Redux/Userlogin/UserLogin";
+import {  loginSliceReducers, userLogin } from "../../Redux/Userlogin/UserLogin";
 // import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
+import { useDispatch } from "react-redux";
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
@@ -24,7 +23,8 @@ const validationSchema = Yup.object({
 
 
 const LogIn = () => {
-  const [error, setError] = useState("");
+  const dispatch = useDispatch()
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -32,15 +32,16 @@ const LogIn = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      let resp=await login(values);
-      if(resp===200){
-        console.log(values);
-        console.log('login successfully');
-      }
-      else{
-console.log('errrrrrrrrrrrrrrrrrr');
-      }
-
+  
+       let resp=await dispatch(userLogin(values.email,values.password));
+     
+       if(resp.status===200){
+        console.log(resp.data.message);
+       }
+       else{
+        console.log(resp.data.message,"errrrrrrrrrrr"); 
+       }
+    
     }
   });
 
@@ -89,7 +90,7 @@ console.log('errrrrrrrrrrrrrrrrrr');
                   {errors.password && touched.password ? (
                     <p className="form-error">{errors.password}</p>
                   ) : null}
-                  {error && <div>{error}</div>}
+       
                 </div>
                 <div className={style.button__container}>
                   <Button
