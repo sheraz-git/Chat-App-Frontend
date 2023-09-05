@@ -13,9 +13,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { tokenGenerator } from "../../tokenGenerator";
 import { sendOtp } from "../../Redux/SignUp/signUpPage";
-  import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("name is required"),
@@ -38,49 +37,49 @@ const SignupPage = () => {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit:async (values) => {
+    onSubmit: async (values) => {
       try {
-        const response = await dispatch(userSignUp(values.name, values.email, values.password));
+        const response = await dispatch(
+          userSignUp(values.name, values.email, values.password)
+        );
         if (response?.response?.status === 409) {
-        
-          toast.error(response?.response.data.message)
-       
+          toast.error(response?.response.data.message);
         } else {
           const token = response.data.token;
           localStorage.setItem("token", token);
-          const {userId}=tokenGenerator();
-           toast.success(response.data.message)
-      console.log(response.data.message);
+          const { userId } = tokenGenerator();
+          toast.success(response.data.message);
+          console.log(response.data.message);
           dispatch(sendOtp(userId));
 
-          setTimeout(()=>{
-          navigate("/otpVerify");
-          },3000)
-
+          setTimeout(() => {
+            navigate("/otpVerify");
+          }, 3000);
         }
       } catch (error) {
         setError("An error occurred. Please try again later.");
       }
     },
   });
-  const { handleChange, values, errors, touched, isValid, handleSubmit } =formik;
+  const { handleChange, values, errors, touched, isValid, handleSubmit } =
+    formik;
   return (
     <Container>
-    <ToastContainer />
-    
-    <div className={style.main__container}>
-      <div className={style.inner__container}>
-        <div className={style.left__container}>
-          <div className={style.overlay}></div>
-        </div>
-        <div className={style.right__container}>
-          <div className={style.form__header}>
-            <Text type={"h1"} label={"Create an account"} />
-            <Text type={"h2"} label={"Lets get started with new Sign up."} />
+      <ToastContainer />
+
+      <div className={style.main__container}>
+        <div className={style.inner__container}>
+          <div className={style.left__container}>
+            <div className={style.overlay}></div>
           </div>
-          <div className={style.form__section}>
-            <form onSubmit={handleSubmit} className={style.form}>
-            
+          <div className={style.moon__back__container}>
+          <div className={style.right__container}>
+            <div className={style.form__header}>
+              <Text type={"h1"} label={"Create an account"} />
+              <Text type={"h2"} label={"Lets get started with new Sign up."} />
+            </div>
+            <div className={style.form__section}>
+              <form onSubmit={handleSubmit} className={style.form}>
                 <div className="d-flex flex-column gap-3 ">
                   <Input
                     type={"text"}
@@ -133,19 +132,18 @@ const SignupPage = () => {
                     svgIcon={<GoogleSvg />}
                   />
                 </div>
-            
-              
-            </form>
+              </form>
+            </div>
+            <div className={style.login__span}>
+              <Text type={"h4"} label={"Already have an account?"} />
+              <Link to={"/"}>
+                <Text label={"Login"} type={"h2"} classData={"fw400"} />
+              </Link>
+            </div>
           </div>
-          <div className={style.login__span}>
-            <Text type={"h4"} label={"Already have an account?"} />
-            <Link to={"/"}>
-              <Text label={"Login"} type={"h2"} classData={"fw400"} />
-            </Link>
           </div>
         </div>
       </div>
-    </div>
     </Container>
   );
 };

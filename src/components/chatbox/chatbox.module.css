@@ -1,0 +1,40 @@
+/* chat navbar  */
+.chat__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 36px;
+  background: #fff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.logo {
+  flex: 1;
+}
+.search__container {
+  flex: 2;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.25),
+    -1px -1px 1px 0px rgba(0, 0, 0, 0.25);
+  padding: 12px 16px;
+}
+.search__input {
+  outline: none;
+  border: none;
+  width: 100%;
+  color: var(--silverColor);
+}
+.search__input::placeholder {
+  color: var(--silverColor);
+}
+.search__border {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.user__acc {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
