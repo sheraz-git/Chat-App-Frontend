@@ -26,21 +26,29 @@
   width: 100%;
   height: 85vh;
 }
-.right__container {
+.moon__back__container{
+  background-image: url('/public/photos/moon-back.png');
+background-size: contain;
+background-repeat: no-repeat;
   flex: 1;
   padding: 10%;
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
+.right__container {
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background-size: cover;
+  
+}
 .overlay {
-  background-image: url("/public/photos/login-bck.png");
+  background-image: url("/public/photos/login-back.png");
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
   background-size: contain;
-  filter: blur(1.5px);
-  /* filter: drop-shadow(2px); */
 }
 .form__section {
   display: flex;

@@ -1,11 +1,14 @@
 * {
   margin: 0;
   padding: 0;
+  overflow: hidder;
 }
 :root {
   --primary: #5fa85f;
   --white: #ffff;
   --black: #000;
+  --lightGreen: 183, 248, 172;
+  --silverColor:#A7A7A7;
 }
 h1 {
   color: #000;
@@ -91,7 +94,7 @@ h5 {
   line-height: normal;
   padding: 12px 0px;
   border: none;
-cursor: pointer;
+  cursor: pointer;
 }
 
 /* input styling  */
