@@ -9,7 +9,7 @@ import { useFormik } from "formik";
 import GoogleSvg from "../../assets/svgs/GoogleSvg";
 import { useDispatch } from "react-redux";
 import { userSignUp } from "../../Redux/SignUp/signUpPage";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { tokenGenerator } from "../../tokenGenerator";
 import { sendOtp } from "../../Redux/SignUp/signUpPage";
@@ -68,26 +68,19 @@ const SignupPage = () => {
     <Container>
     <ToastContainer />
     
-      <div className={style.container}>
+    <div className={style.main__container}>
+      <div className={style.inner__container}>
         <div className={style.left__container}>
-          <img src="/photos/signBack.png" alt="" />
-          <div className={style.welcome__note}>
-            <Text type={"h3"} label={signupData.heading} />
-            <Text
-              type={"h3"}
-              classData={"fw400"}
-              label={signupData.subheading}
-            />
-          </div>
+          <div className={style.overlay}></div>
         </div>
-        <div className={style.signup__form}>
-          <div className={style.form__container}>
-            <div className={style.form__heading}>
-              <Text type={"h1"} label={"Create an account"} />
-              <Text type={"h2"} label={"Lets get started with new Sign up."} />
-            </div>
-            <div className={style.form__section}>
-              <form onSubmit={handleSubmit} className={style.form}>
+        <div className={style.right__container}>
+          <div className={style.form__header}>
+            <Text type={"h1"} label={"Create an account"} />
+            <Text type={"h2"} label={"Lets get started with new Sign up."} />
+          </div>
+          <div className={style.form__section}>
+            <form onSubmit={handleSubmit} className={style.form}>
+            
                 <div className="d-flex flex-column gap-3 ">
                   <Input
                     type={"text"}
@@ -124,6 +117,7 @@ const SignupPage = () => {
                   ) : null}
                   {error && <div>{error}</div>}
                 </div>
+                {/* button  */}
                 <div className={style.button__container}>
                   {/* <Link to="/otpVerify"> */}{" "}
                   <Button
@@ -139,20 +133,19 @@ const SignupPage = () => {
                     svgIcon={<GoogleSvg />}
                   />
                 </div>
-              </form>
-            </div>
+            
+              
+            </form>
           </div>
-
-          <div className={style.already__account}>
-            <Text
-              type={"h5"}
-              label={"Already have an account?"}
-              classData={""}
-            />
-            <Text type={"h2"} label={"Link"} classData={"fw4000"} />
+          <div className={style.login__span}>
+            <Text type={"h4"} label={"Already have an account?"} />
+            <Link to={"/"}>
+              <Text label={"Login"} type={"h2"} classData={"fw400"} />
+            </Link>
           </div>
         </div>
       </div>
+    </div>
     </Container>
   );
 };
