@@ -117,6 +117,7 @@ const SignupPage = () => {
                   ) : null}
                   {error && <div>{error}</div>}
                 </div>
+                {/* button  */}
                 <div className={style.button__container}>
                   {/* <Link to="/otpVerify"> */}{" "}
                   <Button
