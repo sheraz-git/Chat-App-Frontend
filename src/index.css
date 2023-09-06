@@ -5,15 +5,18 @@
 }
 :root {
   --primary: #5fa85f;
+  --primaryColor:#67F04F;
+  --backgroundColor:#D2ECCE;
   --white: #ffff;
   --black: #000;
   --lightGreen: 183, 248, 172;
+  --primaryBackground:103, 240, 79;
   --silverColor:#A7A7A7;
 }
 h1 {
   color: #000;
   font-family: "Inter";
-  font-size: 24px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -25,6 +28,7 @@ h2 {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 0;
 }
 h2.fw500 {
   color: #000;
@@ -63,7 +67,14 @@ h5 {
   font-weight: 400;
   line-height: normal;
 }
-
+h6{
+  color: #000;
+font-family: 'Inter';
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
 /* button styling  */
 .primary {
   border-radius: 5px;

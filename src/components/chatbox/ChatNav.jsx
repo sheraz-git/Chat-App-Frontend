@@ -1,7 +1,9 @@
 import React from "react";
 import style from "./chatbox.module.css";
 import SearchIcon from "../../assets/svgs/SearchIcon";
+import BellIcon from "../../assets/svgs/BellIcon";
 import Input from "../Input";
+import Notify from "../../assets/svgs/Notify";
 
 const ChatNav = () => {
   return (
@@ -19,7 +21,21 @@ const ChatNav = () => {
           />
         </div>
       </div>
-      <div className={style.user__acc}>user acc</div>
+      <div className={style.user__acc}>
+        <div className={style.bell__icon}>
+          <BellIcon />
+          <span className={style.notify}>
+            <Notify />
+          </span>
+        </div>
+        <img
+          src="/photos/moon.jpg"
+          alt=""
+          width={46}
+          height={46}
+          className={style.user__img}
+        />
+      </div>
     </div>
   );
 };

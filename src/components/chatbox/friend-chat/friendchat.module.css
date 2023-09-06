@@ -1,0 +1,38 @@
+
+.friend__chat__container{
+    margin-top: 16px;
+}
+/* single frind styling  */
+.friend__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 9px;
+    margin: 16px 0px;
+}
+.message__highlight{
+    background-color: rgba(var(--primaryBackground), 0.20);
+    border-radius: 10px;
+    padding: 3px 9px;
+}
+.friend__name{
+    display: flex;
+    align-items: center ;
+    gap: 10px;
+}
+.friend__name > img{
+    border-radius: 44px;
+    background-size: cover;
+}
+.friend__message__count{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.count{
+    background-color: var(--primaryColor);
+    color: black;
+    border-radius: 44px;
+    padding: 0px 6px;
+    margin: 0;
+}
