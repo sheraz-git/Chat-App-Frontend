@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <Routes>
+        {/* hello  */}
         <Route path="/" element={<SignupPage />} />
         <Route path="/otpVerify" element={<OtpVerifyPage />} />
         <Route path="/login" element={<LogIn />} />
