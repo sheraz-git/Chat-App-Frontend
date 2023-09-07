@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Routes>
-        {/* ubuntu se dbra kia */}
+        {/* ubuntu se nhe horha bhai */}
         <Route path="/" element={<SignupPage />} />
         <Route path="/otpVerify" element={<OtpVerifyPage />} />
         <Route path="/login" element={<LogIn />} />
