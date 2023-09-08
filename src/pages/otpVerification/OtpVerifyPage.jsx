@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { verifyOtp } from "../../Redux/SignUp/signUpPage";
+import { verifyOtp } from "../../Redux/signUp/signUpAction";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const OtpVerifyPage = () => {
@@ -21,21 +21,15 @@ const OtpVerifyPage = () => {
   };
 
   const handleVerify = async() => {
- 
     const response=await dispatch(verifyOtp(otp));
-    
     if (response.status === 200) {
-   
       console.log(response.data.message);
       toast.success(response.data.message)
-    
       setTimeout(() => {
            navigate("/login");
       }, 2000);
     } else {
-     
       toast.error(response.message)
-
       // toast.error(response.data.message)
       // const {userId}=tokenGenerator();
       // dispatch(sendOtp(userId));

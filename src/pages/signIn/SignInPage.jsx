@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import style from "./login.module.css";
+import style from "./SignIn.module.css";
 import Text from "../../components/Text";
 import { signupData } from "../../data";
 import Input from "../../components/Input";
@@ -12,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { userSignIn } from "../../Redux/signIn/signInAction";
 const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
@@ -20,9 +20,9 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
-
-const LogIn = () => {
-  const [error, setError] = useState("");
+const SignInPage = () => {
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -30,16 +30,21 @@ const LogIn = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
+      const response = await dispatch(userSignIn(values.email, values.password));
+      if(response.status === 200){
+        toast.success(response.data.message)
+        setTimeout(()=>{
+          navigate("/chat")
+        },2000)
+      }    
+          toast.error(response.response.data.message)  
     }
   });
 
   const { handleChange, values, errors, touched, isValid, handleSubmit } = formik;
-
   return (
     <Container>
       <ToastContainer />
-
       <div className={style.container}>
         <div className={style.left__container}>
           <img src="/photos/signBack.png" alt="" />
@@ -79,7 +84,6 @@ const LogIn = () => {
                   {errors.password && touched.password ? (
                     <p className="form-error">{errors.password}</p>
                   ) : null}
-                  {error && <div>{error}</div>}
                 </div>
                 <div className={style.button__container}>
                   <Button
@@ -108,4 +112,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default SignInPage;

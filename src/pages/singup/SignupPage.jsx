@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import style from "./signup.module.css";
 import Text from "../../components/Text";
-import { signupData } from "../../data";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import GoogleSvg from "../../assets/svgs/GoogleSvg";
 import { useDispatch } from "react-redux";
-import { userSignUp } from "../../Redux/SignUp/signUpPage";
-import { Link, useNavigate } from "react-router-dom";
+import { userSignUp,sendEmail } from "../../Redux/signUp/signUpAction";
+import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import { tokenGenerator } from "../../tokenGenerator";
-import { sendOtp } from "../../Redux/SignUp/signUpPage";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from "../../components/Loader";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("name is required"),
@@ -24,12 +22,9 @@ const validationSchema = Yup.object({
     .required("Password is required"),
 });
 
-const SignupPage = () => {
-  // toast.success('hiiiiiiiiiiiii')
+const SignUpPage = () => {
+  const [loading,setLoading] = useState(false)
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
-
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -38,37 +33,27 @@ const SignupPage = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      try {
-        const response = await dispatch(
-          userSignUp(values.name, values.email, values.password)
-        );
-        if (response?.response?.status === 409) {
-          toast.error(response?.response.data.message);
-        } else {
-          const token = response.data.token;
-          localStorage.setItem("token", token);
-          const { userId } = tokenGenerator();
-          toast.success(response.data.message);
-          console.log(response.data.message);
-          dispatch(sendOtp(userId));
-
-          setTimeout(() => {
-            navigate("/otpVerify");
-          }, 3000);
-        }
-      } catch (error) {
-        setError("An error occurred. Please try again later.");
-      }
-    },
-  });
-  const { handleChange, values, errors, touched, isValid, handleSubmit } =
-    formik;
-  return (
-    <Container>
-      <ToastContainer />
-
+        const response = await dispatch(userSignUp(values.name, values.email, values.password));
+         dispatch(sendEmail(values.email));
+        if(response.status === 201){
+          setLoading(true)
+          toast.success(response.data.message)
+        }    
+            toast.error(response.response.data.message)  
+    }});
+  const { handleChange, values, errors, touched, isValid, handleSubmit } = formik;   
+return (
+   <>   
+  <div className={style.signup__container}>
+     {
+      loading && <div className={style.loader__area}>
+      <Loader onClick={()=>dispatch(sendEmail(values.email))}/>
+      </div>
+     }
+    <Container> 
       <div className={style.main__container}>
-        <div className={style.inner__container}>
+      <ToastContainer/>
+        <div className={` ${style.inner__container} ${loading && style.loading__container}`}>
           <div className={style.left__container}>
             <div className={style.overlay}></div>
           </div>
@@ -114,7 +99,6 @@ const SignupPage = () => {
                   {errors.password && touched.password ? (
                     <p className="form-error">{errors.password}</p>
                   ) : null}
-                  {error && <div>{error}</div>}
                 </div>
                 {/* button  */}
                 <div className={style.button__container}>
@@ -144,7 +128,9 @@ const SignupPage = () => {
           </div>
         </div>
       </div>
-    </Container>
+    </Container>   
+  </div>
+   </>
   );
 };
-export default SignupPage;
+export default SignUpPage;
